@@ -263,4 +263,12 @@ describe TweetStream::Client do
       client.stop.should == {}
     end
   end
+
+  describe 'instance .close_connection' do
+    it 'should not call EventMachine::stop_event_loop' do
+      EventMachine.should_not_receive :stop_event_loop
+      TweetStream::Client.new('test','fake').close_connection.should be_nil
+    end
+  end
+
 end
